@@ -12,15 +12,26 @@ def home():
 
 @app.route('/predict',methods=['POST'])
 def predict():
-    cgpa = request.form.get('cgpa')
-    iq = request.form.get('iq')
-    profile_score = request.form.get('profile_score')
 
-    input_query = np.array([[cgpa,iq,profile_score]])
+    Name=request.form.get('name')
+    Gender=request.form.get('Gender')
+    Age=request.form.get('Age')
+    Height=request.form.get('Height')
+    Weight=request.form.get('Weight')
+    Duration=request.form.get('Duration')
+    Heart_Rate=request.form.get('Heart_Rate')
+    Body_Temp=request.form.get('Body_Temp')
+    Heart_Rate=request.form.get('Heart_Rate')
+
+    # cgpa = request.form.get('cgpa')
+    # iq = request.form.get('iq')
+    # profile_score = request.form.get('profile_score')
+
+    input_query = np.array([[Gender,Age,Height,Weight,Duration,Heart_Rate,Body_Temp]])
 
     result = model.predict(input_query)[0]
 
-    return jsonify({'placement':str(result)})
+    return jsonify({'calories_burnt':str(result)})
 
 if __name__ == '__main__':
     app.run(debug=True)
